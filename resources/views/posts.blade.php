@@ -1,14 +1,16 @@
-<!DOCTYPE html>
-<html lang="zxx">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Agus | Post</title>
-        <link rel="icon" type="image/png" href="assets/images/myicon.png" />
-        <link rel="stylesheet" href="css/style.css"> 
-    </head>
-        <h1>Posts</h1>
-        {{-- <script src="assets/plugin/swiper/js/main.js"></script> --}}
-    <body>
-   </body>
-</html>
+
+{{-- @dd($posts) --}}
+@extends('layouts.main')
+@section('container')
+    <h1 class="mb-5">Blogs Post</h1>
+
+    @foreach ($posts as $post )
+    <article class="mb-5">
+        <h2>
+            <a href="/posts/{{ $post['slug'] }}">  {{ $post['title'] }}</a>    
+        </h2>
+        <h3>{{ $post['author'] }}</h3>
+        <p>{{ $post['body'] }}</p>
+    </article>
+    @endforeach
+@endsection
