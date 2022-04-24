@@ -7,10 +7,10 @@
     @foreach ($posts as $post )
     <article class="mb-5">
         <h2>
-            <a href="/posts/{{ $post['slug'] }}">  {{ $post['title'] }}</a>    
+            <a href="/posts/{{ $post->slug }}">  {{ $post->title }}</a>    
         </h2>
-        <h3>{{ $post['author'] }}</h3>
-        <p>{{ $post['body'] }}</p>
+        <h3>{{ $post->author }}</h3>
+        <p>{{ $post->body }}</p>
     </article>
     @endforeach
 @endsection

@@ -6,10 +6,10 @@
 @section('container')
     <article>
         <h2>
-             {{ $post['title'] }}</a>    
+             {{ $post->title }}</a>    
         </h2>
-        <h3>{{ $post['author'] }}</h3>
-        <p> {{ $post['body'] }}</p>
+        <h3>{{ $post->author }}</h3>
+        {!! $post->body !!}
     </article>
     <a href="/blogs">Back To Posts</a>
 @endsection
