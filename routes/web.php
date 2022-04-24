@@ -1,6 +1,9 @@
 <?php
 
+use App\Http\Controllers\PostController;
+use App\Models\Post;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,56 +30,5 @@ Route::get('/about', function () {
     ]);
 });
 
-
-
-Route::get('/blogs', function () {
-    $blog_posts = [
-        [
-            "title" => "Judul Post Pertama",
-            "slug" => "judul-post-pertama",
-            "author" => "Agus",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio vitae repudiandae tempora illum, minima, explicabo, aspernatur libero mollitia blanditiis eveniet doloribus voluptatibus. Eius cum ullam magni laboriosam sit suscipit repellendus!"
-        ],
-        [
-            "title" => "Judul Post Kedua",
-            "slug" => "judul-post-kedua",
-            "author" => "Agus",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio vitae repudiandae tempora illum, minima, explicabo, aspernatur libero mollitia blanditiis eveniet doloribus voluptatibus. Eius cum ullam magni laboriosam sit suscipit repellendus!"
-        ],
-    ];
-
-    return view('posts', [
-        "title" => "News",
-        "posts" => $blog_posts
-    ]);
-});
-
-Route::get('posts/{slug}', function ($slug) {
-
-    $blog_posts = [
-        [
-            "title" => "Judul Post Pertama",
-            "slug" => "judul-post-pertama",
-            "author" => "Agus",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio vitae repudiandae tempora illum, minima, explicabo, aspernatur libero mollitia blanditiis eveniet doloribus voluptatibus. Eius cum ullam magni laboriosam sit suscipit repellendus!"
-        ],
-        [
-            "title" => "Judul Post Kedua",
-            "slug" => "judul-post-kedua",
-            "author" => "Agus",
-            "body" => "Lorem ipsum dolor sit amet consectetur adipisicing elit. Optio vitae repudiandae tempora illum, minima, explicabo, aspernatur libero mollitia blanditiis eveniet doloribus voluptatibus. Eius cum ullam magni laboriosam sit suscipit repellendus!"
-        ],
-    ];
-
-    $new_posts = [];
-    foreach ($blog_posts as $post) {
-        if ($post["slug"] === $slug) {
-            $new_posts = $post;
-        }
-    }
-
-    return view('post', [
-        "title" => "Single Post",
-        "post" =>  $new_posts,
-    ]);
-});
+Route::get('/blogs', [PostController::class, 'index']);
+Route::get('posts/{slug}', [PostController::class, 'show']);
