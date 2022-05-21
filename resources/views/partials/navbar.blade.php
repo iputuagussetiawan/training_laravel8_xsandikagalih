@@ -15,7 +15,7 @@
               </li>
              
               <li class="nav-item">
-                <a class="nav-link {{ ($title==="News")? 'active': '' }}" href="/blogs" >Blog</a>
+                <a class="nav-link {{ ($title==="All Posts")? 'active': '' }}" href="/blogs" >Blog</a>
               </li>
             </ul>
           </div>
