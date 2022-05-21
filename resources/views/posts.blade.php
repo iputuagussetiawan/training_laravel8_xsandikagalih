@@ -20,6 +20,8 @@
     <p>No Post Found</p>
     @endif
 
+    {{-- dd($posts); --}}
+
     <div class="container">
         <div class="row">
             @foreach ($posts->skip(1) as $post )
@@ -30,7 +32,7 @@
                     </h2>
                     <p> By : <a href="/authors/{{ $post->author->username }}">{{ $post->author->name }}</p>
                     <p>in : <a href="/categories/{{$post->category->slug}}">{{ $post->category->name }}</a> {{ $posts[0]->created_at->diffForHumans() }}</p>
-                    <p>{{ $post->body }}</p>
+                    <p>  {!! $post->body !!}</p>
                 </article>
             </div>
             @endforeach
