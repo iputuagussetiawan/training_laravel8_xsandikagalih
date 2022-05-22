@@ -2,7 +2,17 @@
 {{-- @dd($posts) --}}
 @extends('layouts.main')
 @section('container')
-    <h1 class="mb-5">{{ $title }}</h1>
+    <h1 class="mb-5 text-center">{{ $title }}</h1>
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <form action="/blogs">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Search" name="search" id="search" value="{{ request('search') }}">
+                    <button class="btn btn-danger" type="submit">Search</button>
+                </div>
+            </form>
+        </div>
+    </div>
     @if ($posts->count())
         <div class="card mb-3">
             {{-- <img src="..." class="card-img-top" alt="..."> --}}
@@ -16,37 +26,23 @@
              <a href="/posts/{{ $posts[0]->slug }}">Read More..</a>
             </div>
         </div>
+        <div class="container">
+            <div class="row">
+                @foreach ($posts->skip(1) as $post )
+                <div class="col-md-4 mb-3">
+                    <article class="mb-5">
+                        <h2>
+                            <a href="/posts/{{ $post->slug }}">  {{ $post->title }}</a>    
+                        </h2>
+                        <p> By : <a href="/authors/{{ $post->author->username }}">{{ $post->author->name }}</p>
+                        <p>in : <a href="/categories/{{$post->category->slug}}">{{ $post->category->name }}</a> {{ $posts[0]->created_at->diffForHumans() }}</p>
+                        <p>  {!! $post->body !!}</p>
+                    </article>
+                </div>
+                @endforeach
+            </div>
+        </div>
     @else
     <p>No Post Found</p>
     @endif
-
-    {{-- dd($posts); --}}
-
-    <div class="container">
-        <div class="row">
-            @foreach ($posts->skip(1) as $post )
-            <div class="col-md-4 mb-3">
-                <article class="mb-5">
-                    <h2>
-                        <a href="/posts/{{ $post->slug }}">  {{ $post->title }}</a>    
-                    </h2>
-                    <p> By : <a href="/authors/{{ $post->author->username }}">{{ $post->author->name }}</p>
-                    <p>in : <a href="/categories/{{$post->category->slug}}">{{ $post->category->name }}</a> {{ $posts[0]->created_at->diffForHumans() }}</p>
-                    <p>  {!! $post->body !!}</p>
-                </article>
-            </div>
-            @endforeach
-        </div>
-    </div>
-{{--    
-    @foreach ($posts->skip(1) as $post )
-    <article class="mb-5">
-        <h2>
-            <a href="/posts/{{ $post->slug }}">  {{ $post->title }}</a>    
-        </h2>
-        <p> By : <a href="/authors/{{ $post->author->username }}">{{ $post->author->name }}</p>
-        <p>in : <a href="/categories/{{$post->category->slug}}">{{ $post->category->name }}</a></p>
-        <p>{{ $post->body }}</p>
-    </article>
-    @endforeach --}}
 @endsection

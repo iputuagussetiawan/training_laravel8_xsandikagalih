@@ -20,11 +20,13 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('home', [
+        "active" => "home",
         "title" => "Home"
     ]);
 });
 Route::get('/about', function () {
     return view('about', [
+        "active" => "about",
         "title" => "About",
         "name" => "I Putu Agus Setiawan",
         "email" => "iputuagussetiawan@gmail.com",
@@ -36,6 +38,7 @@ Route::get('/blogs', [PostController::class, 'index']);
 Route::get('posts/{post:slug}', [PostController::class, 'show']);
 Route::get('categories', function (Category $category) {
     return view('categories', [
+        'active' => 'categories',
         'title' => 'Post Categories',
         'categories' => Category::all(),
     ]);

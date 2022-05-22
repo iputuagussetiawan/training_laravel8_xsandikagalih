@@ -8,14 +8,17 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link {{ ($title==="Home")? 'active': '' }}" href="/">Home</a>
+                <a class="nav-link {{ ($active==="home")? 'active': '' }}" href="/">Home</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link {{ ($title==="About")? 'active': '' }}" href="/about" >About</a>
+                <a class="nav-link {{ ($active==="about")? 'active': '' }}" href="/about" >About</a>
               </li>
              
               <li class="nav-item">
-                <a class="nav-link {{ ($title==="All Posts")? 'active': '' }}" href="/blogs" >Blog</a>
+                <a class="nav-link {{ ($active==="posts")? 'active': '' }}" href="/blogs" >Blog</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link {{ ($active==="categories")? 'active': '' }}" href="/categories" >Categories</a>
               </li>
             </ul>
           </div>
