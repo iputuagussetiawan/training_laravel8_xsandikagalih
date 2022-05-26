@@ -3,6 +3,11 @@
 <main class="form-signin">
     <div class="row justify-content-center">
         <div class="col-md-5">
+            @if (session()->has('success'))
+            <div class="alert alert-success" role="alert">
+                {{ session('success'); }}
+              </div>
+            @endif
             <h1 class="h3 mb-3 fw-normal text-center">Please sign in</h1>
             <form>
                 <div class="form-floating">
