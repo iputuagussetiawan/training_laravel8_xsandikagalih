@@ -12,26 +12,51 @@
             @csrf
             <div class="mb-3">
                 <label for="title" class="form-label">Title</label>
-                <input type="text" class="form-control" id="title" name="title" placeholder="Title">
+                <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="Title" value="{{ old('title') }}">
+                @error('title')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             <div class="mb-3">
                 <label for="slug" class="form-label">Slug</label>
-                <input type="text" class="form-control" id="slug" name="slug" placeholder="Slug" disabled readonly>
+                <input type="text" class="form-control @error('slug') is-invalid @enderror" id="slug" name="slug" placeholder="Slug" value="{{ old('slug') }}" readonly>
+                @error('slug')
+                <div class="invalid-feedback">
+                    {{ $message }}
+                </div>
+            @enderror
             </div>
             <div class="mb-3">
                 <label for="category" class="form-label">Category</label>
-                <select id="category_id" name="category_id" class="form-select" >
-                    <option value="">Select category</option>
+                <select id="category_id" name="category_id" class="form-select @error('category_id') is-invalid @enderror" >
                    @foreach ($categories as $category )
-                   <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @if (old('category_id')==$category->id)
+                    <option value="{{ $category->id }}" selected>{{ $category->name }}</option>
+                    @else
+                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                    @endif
+                    
                    @endforeach
                 </select>
+                @error('category_id')
+                    <div class="invalid-feedback">
+                        {{ $message }}
+                    </div>
+                @enderror
             </div>
             
             <div class="mb-3">
                 <label for="body" class="form-label">Body</label>
-                <input id="body" type="hidden" name="body">
+                @error('body')
+                <p class="text-danger">
+                    {{ $message }}
+                </p>
+                @enderror
+                <input id="body" name="body" type="hidden" value="{{ old('body') }}">
                 <trix-editor input="body"></trix-editor>
+               
             </div>
             <button type="submit" class="btn btn-primary">Create Post</button>
         </form>
@@ -41,12 +66,6 @@
 <script>
     const title = document.querySelector('#title');
     const slug = document.querySelector('#slug');
-
-    // title.addEventListener('change' function(){
-    //     fetch('/dashboard/posts/checkSlug?title='+ title.value)
-    //     .then (response => response.json())
-    //     .then (data => slug.value=data.slug)
-    // })
 
     title.addEventListener('change', function () {  
         fetch('/dashboard/posts/checkSlug?title='+ title.value)

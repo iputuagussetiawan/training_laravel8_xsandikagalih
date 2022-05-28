@@ -5,6 +5,11 @@
 </div>
 <h2>Section title</h2>
 <a class="btn btn-primary mb-3" href="/dashboard/posts/create"><span data-feather="plus"></span> New Post</a>
+@if (session()->has('success'))
+    <div class="alert alert-success" role="alert">
+        {{ session('success') }}
+    </div>
+@endif
 <div class="table-responsive">
     <table class="table table-striped table-sm">
         <thead>
