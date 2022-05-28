@@ -1,1 +1,0 @@
-alert('Hallow WPU');
