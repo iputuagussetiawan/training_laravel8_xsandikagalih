@@ -4,6 +4,7 @@
     <h1 class="h2">My Post</h1>
 </div>
 <h2>Section title</h2>
+<a class="btn btn-primary mb-3" href="/dashboard/posts/create"><span data-feather="plus"></span> New Post</a>
 <div class="table-responsive">
     <table class="table table-striped table-sm">
         <thead>
