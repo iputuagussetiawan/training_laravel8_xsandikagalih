@@ -21,7 +21,11 @@
     </div>
     @if ($posts->count())
         <div class="card mb-3">
-            {{-- <img src="..." class="card-img-top" alt="..."> --}}
+            @if ($posts[0]->image)
+            <img src="{{ asset('storage/'.$posts[0]->image) }}" alt=" {{ $posts[0]->title }}">
+            @else
+            <img src="{{ asset('storage/post-images/default.png') }}" alt="">
+            @endif
             <div class="card-body">
                 <h5 class="card-title">{{ $posts[0]->title }}</h5>
                 <small>
@@ -36,6 +40,11 @@
             <div class="row">
                 @foreach ($posts->skip(1) as $post )
                 <div class="col-md-4 mb-3">
+                    @if ($post->image)
+                    <img src="{{ asset('storage/'.$post->image) }}" alt=" {{ $post->title }}">
+                    @else
+                    <img src="{{ asset('storage/post-images/default.png') }}" alt="">
+                    @endif
                     <article class="mb-5">
                         <h2>
                             <a href="/posts/{{ $post->slug }}">  {{ $post->title }}</a>    
